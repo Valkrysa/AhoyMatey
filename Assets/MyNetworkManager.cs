@@ -7,12 +7,20 @@ using UnityEngine.Networking;
 public class MyNetworkManager : NetworkManager {
 
     public override void OnStartHost () {
-        Debug.Log("Host started at " + GetCurrentDateTime());
+        Debug.Log(GetCurrentDateTime() + ": Host started");
     }
 
     public void MyStartHost () {
-        Debug.Log("Starting host at " + GetCurrentDateTime());
+        Debug.Log(GetCurrentDateTime() + ": Starting host");
         StartHost();
+    }
+
+    public override void OnStartClient (NetworkClient myClient) {
+        Debug.Log(GetCurrentDateTime() + ": Client start requested");
+    }
+
+    public override void OnClientConnect (NetworkConnection conn) {
+        Debug.Log(GetCurrentDateTime() + ": Client is connected to IP " + conn.address);
     }
 
     private string GetCurrentDateTime () {
