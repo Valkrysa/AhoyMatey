@@ -6,8 +6,6 @@ using UnityEngine.Networking;
 
 public class MyNetworkManager : NetworkManager {
 
-    private bool connected = false;
-
     public override void OnStartHost () {
         Debug.Log(GetCurrentDateTime() + ": Host started");
     }
@@ -19,18 +17,16 @@ public class MyNetworkManager : NetworkManager {
 
     public override void OnStartClient (NetworkClient myClient) {
         Debug.Log(GetCurrentDateTime() + ": Client start requested");
-        InvokeRepeating("PrintDot", 1.0f, 1.0f);
+        InvokeRepeating("PrintDot", 0f, 0.1f);
     }
 
     public override void OnClientConnect (NetworkConnection conn) {
         Debug.Log(GetCurrentDateTime() + ": Client is connected to IP " + conn.address);
-        connected = true;
+        CancelInvoke();
     }
 
     public void PrintDot () {
-        if (!connected) {
-            Debug.Log(".");
-        }
+        Debug.Log(".");
     }
 
     private string GetCurrentDateTime () {
