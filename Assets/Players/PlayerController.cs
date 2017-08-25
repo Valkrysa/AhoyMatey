@@ -11,16 +11,11 @@ public class PlayerController : NetworkBehaviour {
     [Tooltip ("Controls the speed of player movement, defaults to 5.")]
     public float playerSpeed = 5f;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
 	void Update () {
-        if (isLocalPlayer) {
-            TranslatePosition();
+        if (!isLocalPlayer) {
+            return;
         }
+        TranslatePosition();
     }
 
     private void TranslatePosition() {
