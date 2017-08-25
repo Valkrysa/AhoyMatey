@@ -18,6 +18,11 @@ public class PlayerController : NetworkBehaviour {
         TranslatePosition();
     }
 
+    public override void OnStartLocalPlayer () {
+        GetComponentInChildren<Camera>().enabled = true;
+        GetComponentInChildren<AudioListener>().enabled = true;
+    }
+
     private void TranslatePosition() {
         currentVector.x = CrossPlatformInputManager.GetAxis("Horizontal") * Time.deltaTime * playerSpeed;
         currentVector.y = 0f;
